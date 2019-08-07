@@ -1,0 +1,29 @@
+.footer{
+    padding: 30px 0;
+    border-top: 1px solid #e5e5e5;
+    margin-top: 70px;
+    color: #777;
+}
+.container{
+    width: 1200px;
+    margin: 0 auto;
+}
+.containerLeft{
+    float: left;
+    width: 50%;
+}
+.containerRight{
+    float: left;
+    display: flex;
+}
+.col{
+    display: inline-block;
+    height: 160px;
+    margin: 20px;
+}
+.col ul{
+    padding: 0px;
+}
+.col ul li{
+    list-style: none;
+}
