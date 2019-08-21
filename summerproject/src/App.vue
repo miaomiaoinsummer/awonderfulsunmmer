@@ -25,8 +25,8 @@
 }
 </style>
 <script>
-  import Header from '@/views/Header.vue'
-  import Footer from '@/views/Footer.vue'
+  import Header from '@/components/Header.vue'
+  import Footer from '@/components/Footer.vue'
   import '@/assets/css/app.css'
   export default{
     name:'app',

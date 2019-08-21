@@ -1,6 +1,6 @@
 <template>
     <div class="footer">
-            <div class="container">
+            <div class="footer-container">
                 <div class="containerLeft">
                     <h4>Summer Learning</h4>
                     <p>我们一直致力于为广大开发者提供更多的优质技术题库</p>
