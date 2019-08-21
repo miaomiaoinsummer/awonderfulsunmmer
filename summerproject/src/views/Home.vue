@@ -37,7 +37,7 @@ import '@/assets/css/home.css'
         name:'Home',
         components:{carsousel,type},
         data(){
-            typelist:[],
+            typelist:[]
 
         }
     }
