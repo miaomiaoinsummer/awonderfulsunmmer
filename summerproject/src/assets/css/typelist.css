@@ -1,0 +1,15 @@
+.typelist-container{
+    width: 100%;
+}
+.typelist-list{
+    width: 300px;
+    float: left;
+}
+.typelist-content{
+    width: 100%;
+    float: left;
+    margin-left: 320px;
+}
+.typelist-clear{
+    clear: both;
+}

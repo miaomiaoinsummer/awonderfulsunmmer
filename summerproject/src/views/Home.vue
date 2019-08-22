@@ -24,7 +24,9 @@
                 </div>
             </div>
             <div class="carousel-container type-container">
-                <type></type>
+                <type v-for="item in typelist" :typeitem="item"></type>
+                <div class="last-child"></div>
+                <!-- :typeitem = v-bind:typelist(简写) -->
             </div>
     </div>
 </template>
@@ -32,13 +34,29 @@
 
 import carsousel from '@/components/Carousel.vue'
 import type from '@/components/Type.vue'
+import Axios from 'axios'
 import '@/assets/css/home.css'
     export default{
         name:'Home',
         components:{carsousel,type},
-        data(){
+        data:function(){
+           return{
             typelist:[]
-
+           }
+        },
+        methods:{
+            getList:function(){
+                Axios.get('/api/QuestionTypes?p=1&pagesize=20').then((response)=>{
+                    this.typelist=response.data.response;
+                    console.log(this.typelist);
+                })
+                .catch((error)=>{
+                    console.log(error);
+                })
+            }
+        },
+        mounted:function(){
+            this.getList();
         }
     }
 </script>

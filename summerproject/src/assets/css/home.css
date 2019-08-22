@@ -23,6 +23,10 @@ body{
     .projects-header h2 {
         font-size: 42px;
     }
+    .type-components-container{
+        width:50%;
+        float:left;
+    }
 }
 @media (min-width: 992px){
     .carousel-container {
@@ -33,6 +37,10 @@ body{
     }
     h2{
         font-size: 30px;
+    }
+    .type-components-container{
+        width: 33.33333333%;
+        float:left;
     }
 }
 @media (min-width: 1200px){
@@ -45,6 +53,10 @@ body{
     }
     h2{
         font-size: 30px;
+    }
+    .type-components-container{
+        width: 25%;
+        float:left;
     }
 }
 h1,h2{
@@ -113,4 +125,13 @@ h1,h2{
     margin-top: 20px;
     margin-bottom: 10px;
     font-weight: bold;
+}
+.last-child{
+    clear: both;
+}
+
+* {
+    -webkit-box-sizing: border-box !important;
+    -moz-box-sizing: border-box !important;
+    box-sizing: border-box !important;
 }
