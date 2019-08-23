@@ -1,21 +1,19 @@
 <template>
     <div>
-        <div class="container">
+        <!-- <div class="container">
             <carousel></carousel>
-        </div>
+        </div> -->
         <div class="typelist-container">
             <div class="typelist-list">
                 <ul>
-                    <li>1</li>
-                    <li>1</li>
-                    <li>1</li>
-                    <li>1</li>
-                    <li>1</li>          
+                    <li v-for="item in typelisttitle" v-on:click="showContent(item.id)">
+                        {{item.title}}
+                    </li>         
                 </ul>
             </div>
             <div class="typelist-content">
                 <p>
-                        Webpack 是当下最热门的前端资源模块化管理和打包工具。它可以将许多松散的模块按照依赖和规则打包成符合生产环境部署的前端资源
+                    {{typelistContent}}
                 </p>
             </div>
         </div> 
@@ -27,8 +25,36 @@
     import carousel from '@/components/Carousel.vue'
     import '@/assets/css/home.css'
     import '@/assets/css/typelist.css'
+    import axios from 'axios'
     export default{
         name:'typelist',
-        components:{carousel}
+        components:{carousel},
+        data:function(){
+            return{
+                typelisttitle:[],
+                typelistContent:""
+            }
+        },
+        methods:{
+            showContent:function(id){
+                axios.get("/api/QuestionBanks/"+id).then((response)=>{
+                  this.typelistContent=response.data.response.content
+                })
+                .catch((error)=>{
+                    console.log(error)
+                })
+            }
+        },
+        mounted:function(){
+                var id=this.$route.query.name
+                axios.get("/api/QuestionBanks/TitlesByTypeName?typeName="+id).then((response)=>{
+                    this.typelisttitle=response.data.response
+                    this.showContent(this.typelisttitle[0].id);
+                    console.log(response)
+                })
+                .catch((error=>{
+                    console.log(error)
+                }))
+            }
     }
 </script>

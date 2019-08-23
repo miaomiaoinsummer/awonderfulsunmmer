@@ -1,7 +1,7 @@
 
 <template>
     <div>
-        
+        <Header></Header>
         <div class="container">
             <carsousel></carsousel>
         </div>
@@ -28,17 +28,20 @@
                 <div class="last-child"></div>
                 <!-- :typeitem = v-bind:typelist(简写) -->
             </div>
+            <Footer></Footer>
     </div>
 </template>
 <script>
 
+import Header from '@/components/Header.vue'
+import Footer from '@/components/Footer.vue'
 import carsousel from '@/components/Carousel.vue'
 import type from '@/components/Type.vue'
 import Axios from 'axios'
 import '@/assets/css/home.css'
     export default{
         name:'Home',
-        components:{carsousel,type},
+        components:{carsousel,type,Header,Footer},
         data:function(){
            return{
             typelist:[]
