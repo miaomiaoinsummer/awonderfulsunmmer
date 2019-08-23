@@ -4,11 +4,20 @@
 .typelist-list{
     width: 300px;
     float: left;
+    height: 1000px;
+}
+.typelist-list ul{
+    list-style: none;
+}
+.typelist-list ul li{
+    padding-bottom: 15px;
 }
 .typelist-content{
     width: 100%;
-    float: left;
-    margin-left: 320px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-top: 32px;
+    line-height: 1.6em;
 }
 .typelist-clear{
     clear: both;

@@ -3,7 +3,9 @@
         <h1>Summer Learning</h1>
         <h2>简洁、直观、丰富的前端开发题库，让前端知识更系统。</h2>
         <p class="carousel-content">
-            <a class="btn btn-shadow" href="https://v3.bootcss.com/" target="_blank" >前端开发题库文档</a>
+            <router-link class="btn btn-shadow" target="_blank" :to="{path:'/upload'}">
+                    前端开发题库文档上传
+            </router-link>
         </p>
     </div>
 </template>
