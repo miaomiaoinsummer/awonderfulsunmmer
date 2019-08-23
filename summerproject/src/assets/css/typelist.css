@@ -11,6 +11,7 @@
 }
 .typelist-list ul li{
     padding-bottom: 15px;
+    cursor: pointer;
 }
 .typelist-content{
     width: 100%;
