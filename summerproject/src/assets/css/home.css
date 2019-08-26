@@ -13,6 +13,10 @@ body{
 @media (min-width: 768px){
     .carousel-container {
         width: 750px;
+        margin: 0 auto;
+    }
+    .upload-container{
+        width:750px;
     }
     h1{
         font-size: 90px;
@@ -32,6 +36,10 @@ body{
     .carousel-container {
         width: 970px;
     }
+    .upload-container{
+        width:750px;
+        margin: 0 auto;
+    }
     h1{
         font-size: 100px;
     }
@@ -46,6 +54,10 @@ body{
 @media (min-width: 1200px){
     .carousel-container {
         width: 1170px;
+        margin: 0 auto;
+    }
+    .upload-container{
+        width:750px;
     }
     h1{
         font-size: 100px;

@@ -1,5 +1,5 @@
 <template>
-    <div class="type-components-container">  
+    <div class="type-components-container"> 
         <div class="type-components">
             <router-link :to="{path:'/typelist',query:{name:typeitem.name}}" :title="typeitem.name" target="_blank">
                 <img class="lazy" :src="typeitem.logo" :alt="typeitem.name">

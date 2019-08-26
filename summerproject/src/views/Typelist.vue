@@ -1,17 +1,28 @@
 <template>
     <div>
-        <!-- <div class="container">
-            <carousel></carousel>
-        </div> -->
         <div class="typelist-container">
-            <div class="typelist-list">
-                <ul>
-                    <li v-for="item in typelisttitle" v-on:click="showContent(item.id)">
-                        {{item.title}}
-                    </li>         
-                </ul>
+            <div class="typelist-container-menu">       
+                <h1 class="typelist-title-name">{{typelistName+"题型"}}</h1>
+                <form class="typelist-input">
+                    <input type="text"  id="typelist-search" placeholder="Search">
+                    <div class="search-input-icon">
+                        <el-button icon="el-icon-search" circle></el-button>
+                    </div>
+                </form>
+                    <nav class="typelist-list">
+                         <ul>
+                            <li v-for="item in typelisttitle" v-on:click="showContent(item.id)">
+                                {{item.title}}
+                            </li>         
+                         </ul>
+                    </nav>
             </div>
             <div class="typelist-content">
+                    <div class="typelist-content-update">
+                            <el-button type="primary" icon="el-icon-edit" circle></el-button>
+                            <el-button type="danger" icon="el-icon-delete" circle></el-button>
+                            
+                    </div>
                 <p>
                     {{typelistContent}}
                 </p>
@@ -32,7 +43,8 @@
         data:function(){
             return{
                 typelisttitle:[],
-                typelistContent:""
+                typelistContent:"",
+                typelistName:""
             }
         },
         methods:{
@@ -47,6 +59,7 @@
         },
         mounted:function(){
                 var id=this.$route.query.name
+                this.typelistName=id;
                 axios.get("/api/QuestionBanks/TitlesByTypeName?typeName="+id).then((response)=>{
                     this.typelisttitle=response.data.response
                     this.showContent(this.typelisttitle[0].id);
