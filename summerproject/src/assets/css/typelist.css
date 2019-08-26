@@ -24,6 +24,7 @@
     padding: 10px 0 10px 40px;
     display: block;
     font-weight: 200;
+    cursor: pointer;
 }
 .typelist-content{
     max-width: 800px;
