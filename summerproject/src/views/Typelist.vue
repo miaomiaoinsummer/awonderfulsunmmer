@@ -4,14 +4,14 @@
             <div class="typelist-container-menu">       
                 <h1 class="typelist-title-name">{{typelistName+"题型"}}</h1>
                 <form class="typelist-input">
-                    <input type="text"  id="typelist-search" placeholder="Search">
+                    <input type="text"  id="typelist-search" placeholder="Search" v-model="searchValue">
                     <div class="search-input-icon">
-                        <el-button icon="el-icon-search" circle></el-button>
+                        <el-button icon="el-icon-search" circle v-on:click="typelistSearch"></el-button>
                     </div>
                 </form>
                     <nav class="typelist-list">
                          <ul>
-                            <li v-for="item in typelisttitle" v-on:click="showContent(item.id)">
+                            <li v-for="item in typelisttitle" :class="item.isShow?'on':''" v-on:click="showContent(item.id)">
                                 {{item.title}}
                             </li>         
                          </ul>
@@ -19,8 +19,10 @@
             </div>
             <div class="typelist-content">
                     <div class="typelist-content-update">
-                            <el-button type="primary" icon="el-icon-edit" circle></el-button>
-                            <el-button type="danger" icon="el-icon-delete" circle></el-button>
+                        <router-link :to="{path:'/upload',query:{name:typelisttitleid}}">
+                                <el-button type="primary" icon="el-icon-edit" circle></el-button>
+                        </router-link>
+                            <el-button type="danger" icon="el-icon-delete" circle v-on:click="typelistDelete"></el-button>
                             
                     </div>
                 <p>
@@ -44,17 +46,66 @@
             return{
                 typelisttitle:[],
                 typelistContent:"",
-                typelistName:""
+                typelistName:"",
+                typelisttitleid:"",
+                resettypelisttutle:[],
+                searchValue:""
             }
         },
         methods:{
             showContent:function(id){
+                this.typelisttitle.forEach(element=>{
+                    if(element.id==id){
+                        element.isShow=true;
+                    }else{
+                        element.isShow=false;
+                    }
+                })
                 axios.get("/api/QuestionBanks/"+id).then((response)=>{
                   this.typelistContent=response.data.response.content
+                  this.typelisttitleid=response.data.response.id;
                 })
                 .catch((error)=>{
                     console.log(error)
                 })
+            },
+            typelistDelete:function(){
+                axios.delete('api/QuestionBanks/'+this.typelisttitleid).then((response)=>{
+                    this.$message({
+                                message: '删除成功',
+                                type: 'success'
+                                });
+                                history.go(0);
+                    
+                })
+                .catch((error)=>{
+                    this.$message.error('网络加载失败');
+                })
+
+            },
+            typelistSearch:function(){
+                if(this.searchValue!=""){
+                    var alltypelisttitle=[];
+                    this.typelisttitle.forEach(element => {
+                       if(element.title.indexOf(this.searchValue)>=0){
+                           alltypelisttitle.push(element)
+                       }
+                       
+                    }); 
+                    this.typelisttitle=alltypelisttitle;
+                }else{
+                       this.typelisttitle=this.resettypelisttutle
+                }
+
+                
+                this.typelisttitle.forEach(element=>{
+                    if(element.id==this.typelisttitleid){
+                        element.isShow=true;
+                    }else{
+                        element.isShow=false;
+                    }
+                })
+
             }
         },
         mounted:function(){
@@ -62,6 +113,7 @@
                 this.typelistName=id;
                 axios.get("/api/QuestionBanks/TitlesByTypeName?typeName="+id).then((response)=>{
                     this.typelisttitle=response.data.response
+                    this.resettypelisttutle=this.typelisttitle
                     this.showContent(this.typelisttitle[0].id);
                     console.log(response)
                 })

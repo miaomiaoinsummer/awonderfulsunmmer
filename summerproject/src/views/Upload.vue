@@ -16,9 +16,7 @@
             <el-input type="textarea" placeholder="请输入内容" v-model="content" :rows="25"></el-input>
         </div>
         <div class="upload-button">
-            <el-row>
                 <el-button type="primary" round v-on:click="uploadAll">开始上传</el-button>
-            </el-row>
         </div>
     </div>
 </template>
@@ -39,7 +37,8 @@
               uploadType:[],
               title:"",
               content:"",
-              type:""
+              type:"",
+              isUpdate:""
             }
         },
         methods:{
@@ -58,8 +57,31 @@
                         "traffic": 0,
                         "sort": 0,
                         "typeId":parseInt(this.type),
+                        "id":this.isUpdate
                          }
-                axios.post('api/QuestionBanks',uploadModel).then((response)=>{
+                         if( uploadModel.title==""||uploadModel.type==""||uploadModel.content==""){
+                            this.$message({
+                            message: '提交不能为空哦',
+                            type: 'warning'
+                            });
+
+                         }else if(this.isUpdate){
+                            axios.put('api/QuestionBanks/',uploadModel).then((response)=>{
+                                this.$message({
+                                message: '编辑成功',
+                                type: 'success'
+                                });
+                                this.title="";
+                                this.content="";
+                                this.type="" ;
+                               
+                })
+                .catch((error)=>{
+                    this.$message.error('网络加载失败');
+                })
+
+                         }else{
+                            axios.post('api/QuestionBanks',uploadModel).then((response)=>{
                                 this.$message({
                                 message: '添加成功',
                                 type: 'success'
@@ -71,10 +93,20 @@
                 .catch((error)=>{
                     this.$message.error('网络加载失败');
                 })
+
+                         }
+                
             }
         },
         mounted:function(){
             this.getUploadType()
+            this.isUpdate=this.$route.query.name;
+            axios.get('api/QuestionBanks/'+this.isUpdate).then((response)=>{
+                this.title=response.data.response.title;
+                this.content=response.data.response.content;
+                this.type=response.data.response.typeId;
+            })
+
         }
     }
 </script>

@@ -8,7 +8,7 @@
 }
 .typelist-list ul{
     list-style: none;
-    padding: 10px 0;
+    padding: 0;
     margin: 0;
 }
 .typelist-list ul li{
@@ -26,6 +26,12 @@
     font-weight: 200;
     cursor: pointer;
 }
+.typelist-list ul li.on{
+    background-color: #E4E7ED;
+}
+.typelist-list ul li:hover{
+    background-color: #E4E7ED;
+}
 .typelist-content{
     max-width: 800px;
     padding: 0 25px;
@@ -34,6 +40,13 @@
     position: relative;
     background-color: #fff;
     color: #222;
+}
+.typelist-content-update{
+    height: 40px;
+}
+.typelist-content-update button{
+    float: right;
+    margin-right:10px;
 }
 .typelist-clear{
     clear: both;
@@ -56,7 +69,7 @@
     flex-direction: row;
 }
 .typelist-container-menu{
-    background-color: #E4E7ED;;
+    background-color: #f5f5f5;
     width: 300px;
     right: auto;
     bottom: auto;
