@@ -13,7 +13,7 @@
         </div>
         <div class="upload-content">
             <p>题目内容</p>
-            <el-input type="textarea" placeholder="请输入内容" v-model="content" :rows="25"></el-input>
+            <el-input type="textarea" placeholder="请输入内容" v-model="content" :rows="15"></el-input>
         </div>
         <div class="upload-button">
                 <el-button type="primary" round v-on:click="uploadAll">开始上传</el-button>

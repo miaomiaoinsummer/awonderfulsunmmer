@@ -32,6 +32,18 @@ body{
         float:left;
     }
 }
+@media(max-width:500px){
+    .typelist-container-menu{
+        width: 100% !important;
+    }
+    .open-nav{
+        display: block !important
+    }
+    .closed{
+        display: none;
+    }
+
+}
 @media (min-width: 992px){
     .carousel-container {
         width: 970px;

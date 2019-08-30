@@ -3,19 +3,22 @@
         <div class="typelist-container">
             <div class="typelist-container-menu">       
                 <h1 class="typelist-title-name">{{typelistName+"题型"}}</h1>
-                <form class="typelist-input">
-                    <input type="text"  id="typelist-search" placeholder="Search" v-model="searchValue">
-                    <div class="search-input-icon">
-                        <el-button icon="el-icon-search" circle v-on:click="typelistSearch"></el-button>
-                    </div>
-                </form>
-                    <nav class="typelist-list">
-                         <ul>
-                            <li v-for="item in typelisttitle" :class="item.isShow?'on':''" v-on:click="showContent(item.id)">
-                                {{item.title}}
-                            </li>         
-                         </ul>
-                    </nav>
+                <button type="button" class="open-nav" id="open-nav" v-on:click="showMenu"></button>
+                <div class="search-menu" :class="showleftmenu?'closed':''">
+                        <form class="typelist-input">
+                                <input type="text"  id="typelist-search" placeholder="Search" v-model="searchValue">
+                                <div class="search-input-icon">
+                                    <el-button icon="el-icon-search" circle v-on:click="typelistSearch"></el-button>
+                                </div>
+                            </form>
+                                <nav class="typelist-list">
+                                     <ul>
+                                        <li v-for="item in typelisttitle" :class="item.isShow?'on':''" v-on:click="showContent(item.id)">
+                                            {{item.title}}
+                                        </li>         
+                                     </ul>
+                                </nav>
+                </div>
             </div>
             <div class="typelist-content">
                     <div class="typelist-content-update">
@@ -26,7 +29,8 @@
                             
                     </div>
                 <p>
-                    {{typelistContent}}
+                    <!-- {{typelistContent}} -->
+                    <p v-html="typelistContent"></p>
                 </p>
             </div>
         </div> 
@@ -49,11 +53,13 @@
                 typelistName:"",
                 typelisttitleid:"",
                 resettypelisttutle:[],
-                searchValue:""
+                searchValue:"",
+                showleftmenu:true
             }
         },
         methods:{
             showContent:function(id){
+                this.showleftmenu=!this.showleftmenu;
                 this.typelisttitle.forEach(element=>{
                     if(element.id==id){
                         element.isShow=true;
@@ -62,7 +68,7 @@
                     }
                 })
                 axios.get("/api/QuestionBanks/"+id).then((response)=>{
-                  this.typelistContent=response.data.response.content
+                  this.typelistContent=response.data.response.content.replace(/\n/g,'<br>')
                   this.typelisttitleid=response.data.response.id;
                 })
                 .catch((error)=>{
@@ -106,6 +112,9 @@
                     }
                 })
 
+            },
+            showMenu:function(){
+                this.showleftmenu=!this.showleftmenu;
             }
         },
         mounted:function(){

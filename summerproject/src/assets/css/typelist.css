@@ -100,3 +100,28 @@
     left: 15px;
 
 }
+.open-nav:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.open-nav {
+    background-image: url(../images/menu.svg);
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width: 35px;
+    height: 35px;
+    border: 0;
+    position: absolute;
+    top: 12.5px;
+    right: 20px;
+    border-radius: 2px;
+    cursor: pointer;
+    text-transform: none;
+    overflow: visible;
+    color: inherit;
+    font: inherit;
+    margin: 0;
+}
+.open-nav{
+    display: none;
+}
